@@ -1,6 +1,7 @@
 import 'package:best_flutter_ui_templates/hotel_booking/hotel_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/foundation.dart';
 
 class CustomCalendarView extends StatefulWidget {
   const CustomCalendarView(
@@ -248,40 +249,48 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(32.0)),
                         onTap: () {
-                          if (currentMonthDate.month == date.month) {
-                            if (widget.minimumDate != null &&
-                                widget.maximumDate != null) {
-                              final DateTime newminimumDate = DateTime(
-                                  widget.minimumDate.year,
-                                  widget.minimumDate.month,
-                                  widget.minimumDate.day - 1);
-                              final DateTime newmaximumDate = DateTime(
-                                  widget.maximumDate.year,
-                                  widget.maximumDate.month,
-                                  widget.maximumDate.day + 1);
-                              if (date.isAfter(newminimumDate) &&
-                                  date.isBefore(newmaximumDate)) {
-                                onDateClick(date);
-                              }
-                            } else if (widget.minimumDate != null) {
-                              final DateTime newminimumDate = DateTime(
-                                  widget.minimumDate.year,
-                                  widget.minimumDate.month,
-                                  widget.minimumDate.day - 1);
-                              if (date.isAfter(newminimumDate)) {
-                                onDateClick(date);
-                              }
-                            } else if (widget.maximumDate != null) {
-                              final DateTime newmaximumDate = DateTime(
-                                  widget.maximumDate.year,
-                                  widget.maximumDate.month,
-                                  widget.maximumDate.day + 1);
-                              if (date.isBefore(newmaximumDate)) {
-                                onDateClick(date);
-                              }
-                            } else {
+                          debugPrint(widget.toString());
+                          if (widget.minimumDate != null &&
+                              widget.maximumDate != null) {
+                            final DateTime newminimumDate = DateTime(
+                                widget.minimumDate.year,
+                                widget.minimumDate.month,
+                                widget.minimumDate.day - 1);
+                            final DateTime newmaximumDate = DateTime(
+                                widget.maximumDate.year,
+                                widget.maximumDate.month,
+                                widget.maximumDate.day + 1);
+                            if (date.isAfter(newminimumDate) &&
+                                date.isBefore(newmaximumDate)) {
+                              debugPrint("265");
                               onDateClick(date);
                             }
+                          } else if (widget.minimumDate != null) {
+                            onDateClick(date);
+                            debugPrint("269");
+                            final DateTime newminimumDate = DateTime(
+                                widget.minimumDate.year,
+                                widget.minimumDate.month,
+                                widget.minimumDate.day - 1);
+                            debugPrint("minimum " + newminimumDate.toString());
+                            if (date.isAfter(newminimumDate)) {
+                              debugPrint("275");
+                              onDateClick(date);
+                            }
+                          } else if (widget.maximumDate != null) {
+                            debugPrint("278");
+                            final DateTime newmaximumDate = DateTime(
+                                widget.maximumDate.year,
+                                widget.maximumDate.month,
+                                widget.maximumDate.day + 1);
+                            debugPrint("maximum " + newmaximumDate.toString());
+                            if (date.isBefore(newmaximumDate)) {
+                              debugPrint("285");
+                              onDateClick(date);
+                            }
+                          } else {
+                            debugPrint("289");
+                            onDateClick(date);
                           }
                         },
                         child: Padding(
@@ -420,6 +429,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   }
 
   void onDateClick(DateTime date) {
+    debugPrint("onDateClick " + date.toString());
+
     if (startDate == null) {
       startDate = date;
     } else if (startDate != date && endDate == null) {

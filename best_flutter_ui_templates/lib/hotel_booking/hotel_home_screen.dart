@@ -70,7 +70,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                   (BuildContext context, int index) {
                                 return Column(
                                   children: <Widget>[
-                                    getSearchBarUI(),
+                                    //getSearchBarUI(),
                                     getTimeDateUI(),
                                   ],
                                 );
